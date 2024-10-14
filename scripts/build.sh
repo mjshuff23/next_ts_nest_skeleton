@@ -1,14 +1,15 @@
 #!/bin/bash
 
-echo "Fetching secrets from Infisical..."
-node ./infisical/fetchSecrets.mjs
+# Fetch secrets
+npm run fetch-secrets
 
-if [ -f .env ]; then
-    echo ".env file successfully generated"
-else
-    echo "Failed to generate .env file, aborting build"
-    exit 1
-fi
+# Set temporary variables for UID and GID
+CURRENT_UID=$(id -u)
+CURRENT_GID=$(id -g)
 
-echo "Running Docker Compose..."
+# Optional: Write UID and GID to .env file for Docker
+echo "UID=${CURRENT_UID}" >> .env
+echo "GID=${CURRENT_GID}" >> .env
+
+# Start the Docker containers
 docker-compose up --build

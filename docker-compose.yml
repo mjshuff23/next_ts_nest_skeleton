@@ -1,25 +1,26 @@
 services:
   backend:
-    env_file: .env
     build:
       context: .
       dockerfile: backend/Dockerfile
       target: ${NODE_ENV:-development}
-      args:
-        UID: "1000"
-        GID: "1000"
     volumes:
       - ./backend:/usr/src/app
+      - ./backend/db:/var/lib/postgresql/data
       - /usr/src/app/node_modules
     ports:
       - "3001:3001"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - DATABASE_URL=postgres://postgres:yourpassword@db:5432/yourdb
+      - DOCKER=true
+    command: npm run start:dev
     depends_on:
       - db
     networks:
       - app-network
 
   frontend:
-    env_file: .env
     build:
       context: .
       dockerfile: frontend/Dockerfile
@@ -30,17 +31,17 @@ services:
       - /usr/src/app/.next
     ports:
       - "3000:3000"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+    command: npm run dev
     networks:
       - app-network
 
   db:
-    build:
-      context: .
-      dockerfile: db.Dockerfile
-    env_file: .env
+    image: postgres:15.0
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PASSWORD: yourpassword
       POSTGRES_DB: yourdb
     volumes:
       - ./backend/db:/var/lib/postgresql/data

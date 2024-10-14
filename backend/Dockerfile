@@ -11,6 +11,7 @@ FROM base AS development
 RUN npm install
 COPY backend .
 RUN npm run build
+ENV DOCKER=true
 
 # Production build stage
 FROM base AS build
@@ -20,6 +21,7 @@ RUN npm run build
 
 # Production stage
 FROM base AS production
+ENV DOCKER=true
 RUN npm ci --only=production
 COPY --from=build /usr/src/app/dist ./dist
 CMD ["npm", "run", "start:prod"]
