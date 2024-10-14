@@ -2,6 +2,9 @@
   "name": "next_ts_nest_skeleton",
   "version": "1.0.0",
   "private": true,
+  "author": "",
+  "license": "ISC",
+  "description": "A monorepo skeleton with Next.js frontend and NestJS backend",
   "workspaces": [
     "frontend",
     "backend"
@@ -15,18 +18,26 @@
     "start:frontend": "npm run start --workspace=frontend",
     "start:backend": "npm run start:prod --workspace=backend",
     "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend",
-    "test": "npm run test --workspace=frontend && npm run test --workspace=backend"
+    "test": "npm run test --workspace=frontend && npm run test --workspace=backend",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "concurrently": "^8.2.2",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.10"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "keywords": [
     "monorepo",
     "nextjs",
     "nestjs",
     "typescript"
-  ],
-  "author": "",
-  "license": "ISC",
-  "description": "A monorepo skeleton with Next.js frontend and NestJS backend",
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  }
+  ]
 }

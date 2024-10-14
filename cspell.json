@@ -1,0 +1,18 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "commitlint",
+    "eaddrinuse",
+    "nestjs",
+    "nextjs",
+    "tailwindcss",
+    "tsconfig"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "dist",
+    "build",
+    ".next"
+  ]
+}
