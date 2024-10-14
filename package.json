@@ -2,7 +2,7 @@
   "name": "next_ts_nest_skeleton",
   "version": "1.0.0",
   "private": true,
-  "author": "",
+  "author": "Michael Shuff",
   "type": "module", 
   "license": "ISC",
   "description": "A monorepo skeleton with Next.js frontend and NestJS backend",
