@@ -6,6 +6,9 @@ services:
       context: .
       dockerfile: backend/Dockerfile
       target: ${NODE_ENV:-development}
+      args:
+        UID: "1000"  # Hardcode UID to 1000
+        GID: "1000"  # Hardcode GID to 1000
     volumes:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
@@ -13,6 +16,7 @@ services:
       - "3001:3001"
     environment:
       - NODE_ENV=${NODE_ENV:-development}
+    user: "1000:1000"  # Use hardcoded UID and GID
     command: npm run start:dev
     networks:
       - app-network

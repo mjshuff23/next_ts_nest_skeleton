@@ -11,7 +11,6 @@ FROM base AS development
 RUN npm install
 COPY backend .
 RUN npm run build
-CMD ["npm", "run", "start:dev"]
 
 # Production build stage
 FROM base AS build
