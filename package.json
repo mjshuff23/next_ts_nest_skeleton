@@ -1,7 +1,6 @@
 {
   "name": "next_ts_nest_skeleton",
   "version": "1.0.0",
-  "private": true,
   "author": "Michael Shuff",
   "type": "module", 
   "license": "ISC",
