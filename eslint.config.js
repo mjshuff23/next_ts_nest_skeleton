@@ -4,7 +4,7 @@ import parser from '@typescript-eslint/parser';
 
 export default [
   {
-    ignores: ['node_modules'],
+    ignores: ['node_modules', 'backend/db', 'frontend/.next', 'frontend/.next/**'],
     plugins: {
       '@typescript-eslint': typescriptEslintPlugin,
       prettier,
@@ -18,6 +18,7 @@ export default [
     },
     rules: {
       '@typescript-eslint/explicit-module-boundary-types': 'off',
+      'object-shorthand': ['error', 'always'],
     },
   },
 ];

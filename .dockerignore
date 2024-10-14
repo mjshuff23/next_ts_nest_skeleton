@@ -1,0 +1,6 @@
+# .dockerignore
+
+node_modules
+backend/db
+*.log
+.env

@@ -2,7 +2,7 @@
   "name": "next_ts_nest_skeleton",
   "version": "1.0.0",
   "author": "Michael Shuff",
-  "type": "module", 
+  "type": "module",
   "license": "ISC",
   "description": "A monorepo skeleton with Next.js frontend and NestJS backend",
   "workspaces": [
@@ -10,15 +10,20 @@
     "backend"
   ],
   "scripts": {
+    "fetch-secrets": "node ./infisical/fetchSecrets.mjs",
     "clean:next": "rm -rf .next",
-    "dev": "npm run clean:next && concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev": "npm run start:db && concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "dev:frontend": "npm run clean:next && npm run dev --workspace=frontend",
-    "dev:backend": "npm run start:dev --workspace=backend",
+    "dev:backend": "npm run start:db && npm run start:dev --workspace=backend",
     "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:db": "docker-compose up -d db",
     "start:frontend": "npm run start --workspace=frontend",
     "start:backend": "npm run start:prod --workspace=backend",
-    "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend",
+    "start:docker": "npm run fetch-secrets && docker-compose up --build --remove-orphans",
+    "lint:frontend": "npx eslint 'frontend/**/*.{ts,tsx,js,jsx}' --fix",
+    "lint:backend": "npx eslint 'backend/**/*.{ts,tsx,js,jsx}' --fix",
+    "lint": "npm run lint:frontend && npm run lint:backend",
     "test": "npm run test --workspace=frontend && npm run test --workspace=backend",
     "prepare": "husky install"
   },
@@ -44,5 +49,9 @@
     "nextjs",
     "nestjs",
     "typescript"
-  ]
+  ],
+  "dependencies": {
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5"
+  }
 }
