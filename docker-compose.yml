@@ -16,8 +16,11 @@ services:
       - "3001:3001"
     environment:
       - NODE_ENV=${NODE_ENV:-development}
+      - DATABASE_URL=postgres://postgres:yourpassword@db:5432/yourdb  # Add the database connection string
     user: "1000:1000"  # Use hardcoded UID and GID
     command: npm run start:dev
+    depends_on:
+      - db  # Ensure backend waits for the database service to start
     networks:
       - app-network
 
@@ -35,6 +38,19 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-development}
     command: npm run dev
+    networks:
+      - app-network
+
+  db:
+    image: postgres:15.0
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: yourdb
+    volumes:
+      - ./backend/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     networks:
       - app-network
 

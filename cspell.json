@@ -7,9 +7,13 @@
     "logomark",
     "nestjs",
     "nextjs",
+    "Preconfigured",
     "Shuff",
     "tailwindcss",
-    "tsconfig"
+    "tsconfig",
+    "typeorm",
+    "yourdb",
+    "yourpassword"
   ],
   "ignorePaths": [
     "node_modules",
