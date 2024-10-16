@@ -9,6 +9,6 @@ export default [
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'on',
     },
-    ignores: ['db', 'node_modules'],  // Add 'db' to the ignored directories
-  }
+    ignores: ['db', 'node_modules'],
+  },
 ];

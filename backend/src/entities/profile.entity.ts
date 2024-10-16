@@ -1,4 +1,3 @@
-// src/entities/profile.entity.ts
 import {
   Entity,
   Column,
